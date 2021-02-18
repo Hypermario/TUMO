@@ -1,8 +1,5 @@
 import discord
-import json
-import asyncio
-import os
-import time
+import random
 import logging
 from discord.ext import commands
 
@@ -21,6 +18,13 @@ class Events(commands.Cog):
         channel = self.client.get_channel(636029798468157441)
         await channel.send("Je suis en ligne !")
         logging.warning('----- ready -----')
+####################################################################################
+############################ QUESTION ############################
+    @commands.command(aliases=['q'])
+    async def question(self, ctx, *, question):
+        responses=['tg', 'oui', 'non', 'possible']
+        await ctx.send(f'Question: {question}\nRéponse: {random.choice(responses)}')
+        logging.warning(f'exec Q pour {question}')
 ####################################################################################
 #----------------------------------------------------------------------------------------------
 ############################ SETUP ############################
