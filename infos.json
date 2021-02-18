@@ -1,0 +1,63 @@
+{
+    "491615834586742804": {
+        "general": {
+            "name": "Solo",
+            "prefix": "!",
+            "offiRole": 655204347872935947,
+            "memberRole": 662712548646322187,
+            "aoStatusChannel": 654006161082941461
+        },
+        "recrut": {},
+        "battles": {},
+        "channels": {},
+        "rm": {
+            "811350345540173885": {
+                "type": 0,
+                "\ud83d\ude31": 655204347872935947,
+                "\ud83e\udd2b": 658415506289590276
+            }
+        }
+    },
+    "385407111422803968": {
+        "general": {
+            "name": "H&H #1",
+            "prefix": ">",
+            "offiRole": 385408359370719232,
+            "memberRole": null,
+            "aoStatusChannel": 576356486410928138
+        },
+        "recrut": {},
+        "battles": {},
+        "channels": {}
+    },
+    "807618109573300235": {
+        "general": {
+            "name": "Serveur TUMO",
+            "lang": "fr",
+            "prefix": ";",
+            "aoStatusChannel": null
+        },
+        "recrut": {
+            "message": null,
+            "logs": null,
+            "category": null,
+            "recrutRole": null,
+            "applyRole": null,
+            "memberRole": null
+        },
+        "rm": {
+            "811652920743034932": {
+                "type": 0,
+                "<:programmation:811649450678157313>": 811300464481402971,
+                "<:musique:811649438741037066>": 811300425407528970,
+                "<:jeuvideo:811649424068706305>": 811300971392139274,
+                "<:graphisme:811649387775918141>": 811301105622974555,
+                "<:dessin:811649406964989972>": 811300316079063070,
+                "<:cinema:811649348424695878>": 811300928501317672,
+                "<:animation:811649365261025340>": 811300429425672264,
+                "<:3d:811649376169492541>": 811301041403592704
+            }
+        },
+        "channels": {}
+    }
+}
