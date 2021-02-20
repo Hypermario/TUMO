@@ -33,7 +33,7 @@ class Events(commands.Cog):
         await ctx.message.delete(delay=10.0)      # à laisser (?)
         
         if (not suggestion):
-            await ctx.send('Pense à me donner ta suggestion')
+            await ctx.send('Pense à me donner ta suggestion', delete_after=10)
         else:
             setup=discord.Embed(title=" ".join(suggestion),colour=discord.Colour.gold())
             setup.set_author(name=f'{ctx.author} suggère :', icon_url=f'{ctx.author.avatar_url}')
