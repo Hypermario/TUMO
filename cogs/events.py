@@ -26,7 +26,6 @@ class Events(commands.Cog):
         await ctx.send(f'Question: {question}\nRéponse: {random.choice(responses)}')
         logging.warning(f'exec Q pour {question}')
 ####################################################################################
-#----------------------------------------------------------------------------------------------
 ############################# SUGGESTION ############################
     @commands.command(aliases=['sg'])
     async def suggest(self,ctx,*suggestion):
@@ -41,6 +40,12 @@ class Events(commands.Cog):
             await setupMessage.add_reaction('🔼')
             await setupMessage.add_reaction('🔽')
             logging.warning("exec Sg pour : "+" ".join(suggestion))
+####################################################################################
+############################# E T I R E U R   D E   T E X T E ############################
+    @commands.command(aliases=['et'])
+    async def etirer(self,ctx,*,texte):
+        await ctx.message.delete(delay=5.0)
+        await ctx.send(" ".join(texte))
 ####################################################################################
 #----------------------------------------------------------------------------------------------
 ############################ SETUP ############################
