@@ -38,6 +38,7 @@ class Events(commands.Cog):
         embed.add_field(name=";reactionmessage \nalias ;rm", value="*Vous permet de créer différentes choses interactivement* \n ``réservé aux admins``", inline=True)
         embed.add_field(name="**__GitHub__**", value="Retrouvez son code source ici : https://github.com/Hypermario/TUMO-bot", inline=False)
         await ctx.send(embed=embed)
+        logging.warning("exec infos"))
 ####################################################################################
 #----------------------------------------------------------------------------------------------
 ############################# SUGGESTION ############################
