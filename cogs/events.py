@@ -57,14 +57,6 @@ class Events(commands.Cog):
             logging.warning("exec Sg pour : "+" ".join(suggestion))
 ####################################################################################
 #----------------------------------------------------------------------------------------------
-############################# E T I R E U R   D E   T E X T E ############################
-    @commands.command(aliases=['et'])
-    async def etirer(self,ctx,*,texte):
-        await ctx.message.delete(delay=5.0)
-        await ctx.send(" ".join(texte))
-        logging.warning("exec Et pour : "+" ".join(texte))
-####################################################################################
-#----------------------------------------------------------------------------------------------
 ############################ SETUP ############################
 def setup(client):
     client.add_cog(Events(client))
