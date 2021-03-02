@@ -9,7 +9,6 @@ class Textransform(commands.Cog):
     def __init__(self, client):
         logging.basicConfig(filename='logs.log', format='%(asctime)s %(message)s', datefmt='[%d/%m/%Y | %H:%M:%S]')
         self.client = client
-        self.hypermario = 337950764498419732
 
 #----------------------------------------------------------------------------------------------
 ############################# E T I R E U R   D E   T E X T E ############################
