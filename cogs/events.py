@@ -79,22 +79,6 @@ class Events(commands.Cog):
         logging.warning("exec infos"))
 ####################################################################################
 #----------------------------------------------------------------------------------------------
-############################# SUGGESTION ############################
-    @commands.command(aliases=['sg'])
-    async def suggest(self,ctx,*suggestion):
-        await ctx.message.delete(delay=5.0)      # à laisser (?)
-        
-        if (not suggestion):
-            await ctx.send('Pense à me donner ta suggestion', delete_after=10)
-        else:
-            setup=discord.Embed(title=" ".join(suggestion),colour=discord.Colour.gold())
-            setup.set_author(name=f'{ctx.author} suggère :', icon_url=f'{ctx.author.avatar_url}')
-            setupMessage = await ctx.send(embed=setup)    
-            await setupMessage.add_reaction('🔼')
-            await setupMessage.add_reaction('🔽')
-            logging.warning("exec Sg pour : "+" ".join(suggestion))
-####################################################################################
-#----------------------------------------------------------------------------------------------
 ############################ SETUP ############################
 def setup(client):
     client.add_cog(Events(client))
