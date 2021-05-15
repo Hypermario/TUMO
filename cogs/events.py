@@ -16,7 +16,10 @@ class Events(commands.Cog):
     async def on_ready(self):
         await self.client.change_presence(status=discord.Status.dnd, activity=None)
         channel = self.client.get_channel(636029798468157441)
-        await channel.send("Je suis en ligne !")
+        if not channel:
+            pass
+        else:
+            await channel.send("Je suis en ligne !")
         logging.warning('----- ready -----')
 ####################################################################################
 
