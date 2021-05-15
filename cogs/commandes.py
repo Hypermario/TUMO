@@ -57,7 +57,7 @@ class Commandes(commands.Cog):
                 time.sleep(0.5)
             logging.warning(f'exec spam {times}')
 
-############################ QUESTION ############################
+##### QUESTION
     @commands.command(aliases=['q'])
     async def question(self, ctx, *, question):
         responses=['tg', 'oui', 'non', 'possible']
@@ -66,8 +66,24 @@ class Commandes(commands.Cog):
         else:
             await ctx.send(f'Question: {question}\nRéponse: {random.choice(responses)}.')
         logging.warning(f'exec Q pour {question}')
-####################################################################################
 
+##### SUGGESTION
+    @commands.command(aliases=['sg'])
+    async def suggest(self,ctx,*suggestion):
+        await ctx.message.delete(delay=5.0)      # à laisser (?)
+        
+        if (not suggestion):
+            await ctx.send('Pense à me donner ta suggestion', delete_after=10)
+        else:
+            setup=discord.Embed(title=" ".join(suggestion),colour=discord.Colour.gold())
+            setup.set_author(name=f'{ctx.author} suggère :', icon_url=f'{ctx.author.avatar_url}')
+            setupMessage = await ctx.send(embed=setup)    
+            await setupMessage.add_reaction('🔼')
+            await setupMessage.add_reaction('🔽')
+            logging.warning("exec Sg pour : "+" ".join(suggestion))
+
+
+##### MUTE
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def mute(self, ctx):
@@ -87,6 +103,7 @@ class Commandes(commands.Cog):
                     
         await ctx.send('mute')
         
+##### UNMUTE
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def unmute(self, ctx):
@@ -106,6 +123,7 @@ class Commandes(commands.Cog):
                     
         await ctx.send('unmute')
 
+##### HELP
     @commands.command()
     async def help(self, ctx, categorie=''):
         categorie = categorie.lower()

@@ -1,0 +1,6 @@
+# directories :
+.vscode/
+__pycache__/
+
+# files : 
+logs.log
