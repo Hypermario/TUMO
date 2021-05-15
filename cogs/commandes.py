@@ -75,9 +75,12 @@ class Commandes(commands.Cog):
         if (not suggestion):
             await ctx.send('Pense à me donner ta suggestion', delete_after=10)
         else:
-            setup=discord.Embed(title=" ".join(suggestion),colour=discord.Colour.gold())
+            if len(" ".join(suggestion)) >= 256:
+                setup = discord.Embed(description=str(" ".join(suggestion)),colour=discord.Colour.gold())
+            else:
+                setup = discord.Embed(title=" ".join(suggestion),colour=discord.Colour.gold())
             setup.set_author(name=f'{ctx.author} suggère :', icon_url=f'{ctx.author.avatar_url}')
-            setupMessage = await ctx.send(embed=setup)    
+            setupMessage = await ctx.send(embed=setup)
             await setupMessage.add_reaction('🔼')
             await setupMessage.add_reaction('🔽')
             logging.warning("exec Sg pour : "+" ".join(suggestion))
