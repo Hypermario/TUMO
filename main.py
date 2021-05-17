@@ -1,5 +1,6 @@
 import discord
 import os
+from dotenv import load_dotenv
 import json
 import logging
 from discord.ext import commands, tasks
@@ -88,9 +89,12 @@ async def on_command_error(ctx, error):
         return 0
     else:
         errorChannel = client.get_channel(664926718762418226)
-        await errorChannel.send(f"```py\n{str(error)}```")
-        logging.warning(str(error))
-        return print(error)
+        if not errorChannel:
+            print(error)
+        else:
+            await errorChannel.send(f"```py\n{str(error)}```")
+            logging.warning(str(error))
+            return print(error)
 ####################################################################################
 #----------------------------------------------------------------------------------------------
 ############################ LOAD FUNCTION ############################
@@ -140,5 +144,8 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 ####################################################################################
 #----------------------------------------------------------------------------------------------
-client.run('#####')
+load_dotenv()
+token = os.getenv("TOKEN")
+
+client.run(token)
 #----------------------------------------------------------------------------------------------

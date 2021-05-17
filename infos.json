@@ -59,5 +59,23 @@
             }
         },
         "channels": {}
+    },
+    "742859685878693929": {
+        "general": {
+            "name": "Bot test",
+            "lang": "fr",
+            "prefix": ";",
+            "aoStatusChannel": null
+        },
+        "recrut": {
+            "message": null,
+            "logs": null,
+            "category": null,
+            "recrutRole": null,
+            "applyRole": null,
+            "memberRole": null
+        },
+        "rm": {},
+        "channels": {}
     }
 }
