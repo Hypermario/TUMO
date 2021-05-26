@@ -73,7 +73,7 @@ class Commandes(commands.Cog):
         await ctx.message.delete(delay=5.0)      # à laisser (?)
         
         if (not suggestion):
-            await ctx.send('Pense à me donner ta suggestion', delete_after=10)
+            await ctx.send('Pense à me donner ta suggestion', delete_after=8)
         else:
             if len(" ".join(suggestion)) >= 256:
                 setup = discord.Embed(description=str(" ".join(suggestion)),colour=discord.Colour.gold())
@@ -85,6 +85,79 @@ class Commandes(commands.Cog):
             await setupMessage.add_reaction('🔽')
             logging.warning("exec Sg pour : "+" ".join(suggestion))
 
+##### KICK
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def kick(self, ctx, user:discord.User, *reason):
+
+        if user.bot:
+            await ctx.message.delete()
+            return await ctx.send("Tu ne peux pas kick un bot avec cette commande",delete_after=10)
+        if user == ctx.author:
+            await ctx.message.delete()
+            return await ctx.send("Tu ne peux pas te kick toi-même", delete_after=10)
+
+        reason = " ".join(reason)
+        await user.send(f"Tu as été kick du serveur : {ctx.guild.name}\n```Raison : {reason}```")
+        embed = discord.Embed(colour = discord.Colour.gold(),description=f"```Raison : {reason}\nModérateur : {ctx.author}```")
+        embed.set_author(name=f"{user} s'est fait kick du serveur")
+        embed.set_image(url='https://media.giphy.com/media/l3V0j3ytFyGHqiV7W/giphy.gif')
+        try:
+            await ctx.guild.kick(user, reason= reason)
+        except Exception as err:
+            await ctx.send(f"Je n'ai pas réussi pour la raison suivante :\n{err}")
+        await ctx.send(embed=embed)
+
+##### BAN
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def ban(self, ctx, user:discord.User, *reason):
+
+        if user.bot:
+            await ctx.message.delete()
+            return await ctx.send("Tu ne peux pas ban un bot avec cette commande",delete_after=10)
+        if user == ctx.author:
+            await ctx.message.delete()
+            return await ctx.send("Tu ne peux pas te ban toi-même", delete_after=10)
+
+        reason = " ".join(reason)
+        await user.send(f"Tu as été banni du serveur : `{ctx.guild.name}`\n```Raison : {reason}```")
+        embed = discord.Embed(colour = discord.Colour.gold(),description=f"```Raison : {reason}\nModérateur : {ctx.author}```")
+        embed.set_author(name=f"{user} s'est fait bannir du serveur")
+        embed.set_image(url='https://media.giphy.com/media/1Nclw5CJ3N77G/giphy.gif')
+        try:
+            await ctx.guild.ban(user, reason= reason)
+        except Exception as err:
+            await ctx.send(f"Je n'ai pas réussi pour la raison suivante :\n{err}")
+        await ctx.send(embed=embed)
+
+##### UNBAN
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def unban(self,ctx,user,*reason):        
+        if "#" not in user:
+            await ctx.message.delete()
+            return await ctx.send("Mauvais format d'utilisateur\nFormat attendu : *Exemple#0000*", delete_after=10)
+
+        user_name, user_id = user.split("#")
+        
+        if len(user_id) != 4:
+            await ctx.message.delete()
+            return await ctx.send("Mauvais format d'utilisateur\nFormat attendu : *Exemple#0000*", delete_after=10)
+
+        if user_name == ctx.author:
+            await ctx.message.delete()
+            return await ctx.send("Tu n'es pas banni...", delete_after=10)
+
+        reason = " ".join(reason)
+        banned_users = await ctx.guild.bans()
+        for banned in banned_users:
+            if banned.user.name == user_name and banned.user.id == user_id:
+                await ctx.guild.unban(banned.user,reason=reason)
+                embed = discord.Embed(colour = discord.Colour.gold(),description=f"```Raison : {reason}\nModérateur : {ctx.author}```")
+                embed.set_author(name=f"{user} à été unban")
+                return await ctx.send(embed=embed)
+        await ctx.send("Le membre en question n'a pas été trouvé\nVérifie qu'il soit banni de ce serveur")
 
 ##### MUTE
     @commands.command()
@@ -165,7 +238,29 @@ class Commandes(commands.Cog):
             embed.add_field(name="Rejoignez le discord !", value="https://discord.gg/gMeHW8G", inline=False)
             
         await ctx.send(embed=embed)
-        
-        
+
+##### LOTO
+    @commands.command()
+    @commands.cooldown(1,1800)
+    async def loto(self,ctx):
+        if ctx.guild != 807618109573300235: return
+        random1 = random.randint(1,30)
+        random2 = random.randint(1,30)
+        await ctx.send("**💰Loto des Informaticiens 💰**\n\n"
+                f"**➜ Votre premier numéro est le:** ``{random1}``\n\n"
+                f"**➜ Votre deuxième numéro est le: **``{random2}\n\n``"
+                f"***Que la chance soit avec toi <@{ctx.author.id}> !***")
+
+        if random2 == random2:
+            reponses = [f"On me dit à l'oreilette que vous avez gagné {random1} 000 !",
+            f"C'est votre jour de chance on dirait. Vous remportez : {random1} 000",
+            f"Woah ! vous avez gagné {random1} 000",
+            f"$^$ Voici votre gain : +{random1} 000"]
+            await ctx.send(random.choice(reponses))
+                
+            channel = self.client.get_channel(846480261905383534)
+            await channel.send(f'$money-add bank <@{ctx.author.id}> {random1}000')
+
+
 def setup(client):
     client.add_cog(Commandes(client))

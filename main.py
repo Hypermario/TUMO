@@ -87,6 +87,8 @@ async def on_command_error(ctx, error):
         return 0
     elif isinstance(error, commands.CommandNotFound):
         return 0
+    elif isinstance(error, commands.CommandOnCooldown):
+        return await ctx.send(f"Woah, doucement. Cette commande à un cooldown de 30 min")
     else:
         errorChannel = client.get_channel(664926718762418226)
         if not errorChannel:
